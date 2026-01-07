@@ -124,8 +124,8 @@ export default function ServicesPage() {
                     </div>
                     {/* Logos */}
                     <div className="flex flex-col gap-4">
-                        <div className="bg-white p-2 rounded"><Image src="/jama-punji.png" alt="Jama Punji" width={180} height={50} /></div>
-                        <div className="bg-white p-2 rounded"><Image src="/secp.png" alt="SECP" width={180} height={50} /></div>
+                        <div className="bg-white p-2 rounded"><Image src="/jamapunji.jpg" alt="Jama Punji" width={180} height={50} /></div>
+                        <div className="bg-white p-2 rounded"><Image src="/secp_new.jpg" alt="SECP" width={180} height={50} /></div>
                     </div>
                 </div>
                 <div className="text-center pt-6 text-[11px] opacity-80 uppercase tracking-wider">
