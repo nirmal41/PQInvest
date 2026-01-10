@@ -68,7 +68,7 @@ export default function ServicesPage() {
                             {/* HEADING WITH SHORT UNDERLINE */}
                             <div className="mb-12 inline-block p-4 pt-8">
                                 <h2 className="text-4xl font-bold text-black leading-none">
-                                    CONTACT US
+                                    Careers
                                 </h2>
                                 <div className="w-12 h-1.5 bg-black mt-3"></div>
                                 <p className="text-[15px] leading-relaxed mb-6 pt-2  text-gray-700">
