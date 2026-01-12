@@ -38,14 +38,14 @@ export default function ServicesPage() {
                     <div className="absolute inset-0 flex flex-col justify-center px-12 md:px-24">
                         <div className="w-16 h-[6px] bg-white mb-4"></div>
                         <h1 className="text-white font-bold leading-tight uppercase" style={{ fontSize: '40px' }}>
-                            Our<br />CAREERS
+                            CAREERS
                         </h1>
                     </div>
                 </div>
 
                 {/* Breadcrumbs */}
                 <div className="bg-white py-2 px-12 md:px-24 text-[11px] text-gray-500 font-bold border-b">
-                    HOME &gt; OUR SERVICES
+                    HOME &gt; CAREERS
                 </div>
 
 

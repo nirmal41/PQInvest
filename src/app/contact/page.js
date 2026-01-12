@@ -18,9 +18,10 @@ export default function ContactUsPage() {
                     </div>
                 </div>
 
-                {/* --- Breadcrumbs --- */}
+            
+                 {/* Breadcrumbs */}
                 <div className="bg-white py-2 px-12 md:px-24 text-[11px] text-gray-500 font-bold border-b">
-                    <Link href="/" className="hover:text-[#8b0037]">HOME</Link> CONTACT US
+                    HOME &gt; CONTACT US
                 </div>
 
                 {/* --- Main Content Section --- */}
