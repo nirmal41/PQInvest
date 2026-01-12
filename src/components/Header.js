@@ -119,7 +119,8 @@ export default function Header() {
                         <span className="absolute bottom-[-5px] left-0 w-0 h-[4px] bg-[#8b0037] transition-all duration-300 group-hover:w-full"></span>
                     </li>
                     <li className="group relative cursor-pointer py-2 text-[#8b0037] text-[15px] font-[400] uppercase">
-                        CONTACT US
+                        <Link href="/contact">CONTACT US</Link>
+                        
                         <span className="absolute bottom-[-5px] left-0 w-0 h-[4px] bg-[#8b0037] transition-all duration-300 group-hover:w-full"></span>
                     </li>
                 </ul>
