@@ -95,16 +95,36 @@ export default function Header() {
                             <div className="grid grid-cols-2 gap-x-16 gap-y-2">
                                 {/* Left Column - Default Underline and Less Spacing (gap-2) */}
                                 <div className="flex flex-col gap-2">
-                                    <a href="#" className="text-[#333] text-[14px] underline decoration-1 underline-offset-4 hover:text-black w-fit">The Company</a>
-                                    <a href="#" className="text-[#333] text-[14px] underline decoration-1 underline-offset-4 hover:text-black w-fit">Vision & Mission</a>
-                                    <a href="#" className="text-[#333] text-[14px] underline decoration-1 underline-offset-4 hover:text-black w-fit">Corporate Information</a>
-                                    <a href="#" className="text-[#333] text-[14px] underline decoration-1 underline-offset-4 hover:text-black w-fit">Directors</a>
+                                    <Link
+                                        href="/about/the-company"
+                                        className="text-[#333] text-[14px] underline decoration-1 underline-offset-4 hover:text-black w-fit"
+                                    >
+                                        The Company                                    </Link>
+<Link
+                                        href="/about/corporate-information"
+                                        className="text-[#333] text-[14px] underline decoration-1 underline-offset-4 hover:text-black w-fit"
+                                    >
+                                        vision-mission
+                                    </Link>                                    <Link
+                                        href="/about/corporate-information"
+                                        className="text-[#333] text-[14px] underline decoration-1 underline-offset-4 hover:text-black w-fit"
+                                    >
+                                        Corporate Information
+                                    </Link>
+                                    <Link
+                                        href="/about/directors"
+                                        className="text-[#333] text-[14px] underline decoration-1 underline-offset-4 hover:text-black w-fit"
+                                    >
+                                        Directors                                    </Link>
                                 </div>
 
                                 {/* Right Column */}
                                 <div className="flex flex-col gap-2">
-                                    <a href="#" className="text-[#333] text-[16px] underline decoration-1 underline-offset-4 hover:text-black w-fit">Management Team</a>
-                                    <a href="#" className="text-[#333] text-[16px] underline decoration-1 underline-offset-4 hover:text-black w-fit">Our Sponsors</a>
+<Link
+                                        href="/about/management-team"
+                                        className="text-[#333] text-[14px] underline decoration-1 underline-offset-4 hover:text-black w-fit"
+                                    >
+                                        Management Team                                    </Link>                                    <a href="#" className="text-[#333] text-[16px] underline decoration-1 underline-offset-4 hover:text-black w-fit">Our Sponsors</a>
                                 </div>
                             </div>
                         </div>
@@ -120,7 +140,7 @@ export default function Header() {
                     </li>
                     <li className="group relative cursor-pointer py-2 text-[#8b0037] text-[15px] font-[400] uppercase">
                         <Link href="/contact">CONTACT US</Link>
-                        
+
                         <span className="absolute bottom-[-5px] left-0 w-0 h-[4px] bg-[#8b0037] transition-all duration-300 group-hover:w-full"></span>
                     </li>
                 </ul>

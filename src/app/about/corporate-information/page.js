@@ -1,13 +1,14 @@
+
+
 "use client";
 
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-export default function TheCompany() {
+export default function CorporateInformation() {
     const pathname = usePathname();
 
-    // Menu items matches your folder structure for navigation
     const menuItems = [
         { name: "The Company", href: "/about/the-company" },
         { name: "Vision & Mission", href: "/about/vision-mission" },
@@ -15,6 +16,17 @@ export default function TheCompany() {
         { name: "Directors", href: "/about/directors" },
         { name: "Management Team", href: "/about/management-team" },
         { name: "Sponsors", href: "/about/sponsors" },
+    ];
+
+    const infoData = [
+        { label: "Name of Company", value: "Pak-Qatar Investment (Private) Limited" },
+        { label: "Company Registration Number", value: "0101270" },
+        { label: "Company National Tax Number", value: "7302534" },
+        { label: "Status of Company", value: "Private Limited" },
+        { label: "Address of Registered Office", value: "First Floor, Business Arcade, Block-6, P.E.C.H.S, Shahrah-e-Faisal, Karachi." },
+        { label: "Phone & Fax numbers – Registered Office", value: "PABX: (+92 21) 34311747-56 Fax: (+92 21) 34386451" },
+        { label: "Email Address", value: "info@pqinvest.com.pk" },
+        { label: "Chief Executive Officer", value: "Muhammad Kamran Saleem" },
     ];
 
     return (
@@ -33,53 +45,50 @@ export default function TheCompany() {
 
                 {/* --- Breadcrumbs --- */}
                 <div className="bg-white py-2 px-12 md:px-24 text-[11px] text-gray-500 font-bold border-b uppercase">
-                    Home &gt; About Us &gt; The Company
+                    Home &gt; About Us &gt; Corporate Information
                 </div>
 
                 {/* --- Main Content Section --- */}
                 <div className="bg-[#F7F7F7] w-full py-12 relative overflow-hidden">
-                    {/* Background Watermark Vectors (Left and Right) */}
-                    <div className="absolute left-0 top-10 opacity-40 z-0 pointer-events-none">
-                        <Image src="/content-watermark-left1.png" alt="vector" width={180} height={250} priority />
+                    <div className="absolute left-0 top-10 opacity-60 z-0 pointer-events-none">
+                        <Image src="/content-watermark-left1.png" alt="vector" width={200} height={300} priority />
                     </div>
-                    <div className="absolute right-0 bottom-10 opacity-40 z-0 pointer-events-none rotate-180">
-                        <Image src="/content-watermark-left1.png" alt="vector" width={180} height={250} priority />
+                    <div className="absolute right-0 bottom-10 opacity-60 z-0 pointer-events-none scale-x-[-1]">
+                        <Image src="/content-watermark-left1.png" alt="vector" width={200} height={300} priority />
                     </div>
-
                     <div className="max-w-7xl mx-auto relative px-4 z-10">
-                        {/* Main Container Box */}
-                        <div className="bg-white shadow-2xl border border-gray-100 flex flex-col md:flex-row p-8 md:p-14 gap-12">
+                        <div className="bg-white shadow-2xl border border-gray-100 flex flex-col md:flex-row p-8 md:p-12 gap-8">
 
-                            {/* LEFT COLUMN: Main Text Content */}
+                            {/* LEFT COLUMN: Table Content */}
                             <div className="flex-grow md:w-2/3">
-                                {/* Heading with Tight Underline */}
                                 <div className="mb-8 inline-block">
                                     <h2 className="text-4xl font-bold text-black leading-[0.7]">
-                                        The Company
+                                        Corporate Information
                                     </h2>
                                     <div className="w-12 h-1.5 bg-black mt-1"></div>
                                 </div>
 
-                                {/* Content Body with Maroon Text Color */}
-                                <div className="text-[15px] text-[#8b0037] space-y-6 leading-relaxed text-justify">
-                                    <p>
-                                        Pak-Qatar Investment (Private) Limited (PQIL) specializes in providing independent assessments and exclusive investment recommendations to its clients. The company is based on offering objective perspective, personalized planning, and sophisticated investment advise to individuals and corporate investors.
-                                    </p>
-                                    <p>
-                                        PQIL investment strategies are designed to create value within opportunities and maximize returns for its investors. The Company seeks opportunities that provide its partners with the highest probability of earning optimum returns.
-                                    </p>
-                                    <p>
-                                        Pak-Qatar Investment (Private) Limited (PQIL) is one of the key sponsor of Pak-Qatar Group. Formed in 2017, PQIL currently holds private equities, Musharaka and Modarba Mode financing and aims to expand its horizons by investing in various profitable and progressive avenues.
-                                    </p>
-                                    <p>
-                                        PQIL is committed in providing its stakeholders with dedicated and transparent services that they can always trust and count on.
-                                    </p>
+                                <div className="overflow-x-auto border border-gray-200">
+                                    <table className="w-full text-left border-collapse">
+                                        <tbody>
+                                            {infoData.map((item, index) => (
+                                                <tr key={index} className="border-b border-gray-200 last:border-none">
+                                                    <td className="p-4 text-[14px] font-semibold text-[#8b0037] bg-gray-50 w-1/3 border-r border-gray-200">
+                                                        {item.label}
+                                                    </td>
+                                                    <td className="p-4 text-[14px] text-gray-700">
+                                                        {item.value}
+                                                    </td>
+                                                </tr>
+                                            ))}
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
 
-                            {/* RIGHT COLUMN: Sidebar Navigation */}
+                            {/* RIGHT COLUMN: Sidebar Menu */}
                             <div className="md:w-1/3">
-                                <div className="border border-gray-200">
+                                <div className="border border-gray-200 sticky top-24">
                                     <div className="bg-[#8b0037] text-white p-4 font-bold text-lg uppercase">
                                         About Us
                                     </div>
@@ -88,12 +97,12 @@ export default function TheCompany() {
                                             <li key={index} className="border-b border-gray-100 last:border-none">
                                                 <Link
                                                     href={item.href}
-                                                    className={`flex items-center px-4 py-3 text-[14px] font-semibold transition-all duration-200 ${pathname === item.href
+                                                    className={`flex items-center px-4 py-3 text-[14px] font-semibold transition-all ${pathname === item.href
                                                         ? "text-[#8b0037] bg-gray-50"
                                                         : "text-gray-700 hover:text-[#8b0037] hover:bg-gray-50"
                                                         }`}
                                                 >
-                                                    <span className={`mr-2 transition-colors ${pathname === item.href ? "text-[#8b0037]" : "text-gray-400"}`}>
+                                                    <span className={`mr-2 transition-transform ${pathname === item.href ? "rotate-0 text-[#8b0037]" : ""}`}>
                                                         &gt;
                                                     </span>
                                                     {item.name}
