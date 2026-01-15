@@ -1,4 +1,11 @@
-export default function Banner() {
+export default function Banner({ data }) {
+    console.log('Banner data from Strapi:', data);
+
+    // Get Strapi base URL from environment or use default
+    const STRAPI_URL = process.env.NEXT_PUBLIC_STRAPI_API_URL || "http://127.0.0.1:2555";
+    // Construct full video URL
+    const videoUrl = data?.video?.url ? `${STRAPI_URL}${data.video.url}` : null;
+
     return (
         <section className="relative h-[75vh] w-full flex items-center justify-center overflow-hidden">
             {/* Background Video */}
@@ -9,7 +16,7 @@ export default function Banner() {
                 playsInline
                 className="absolute z-[-1] w-full h-full object-cover"
             >
-                <source src="/banner.mp4" type="video/mp4" />
+                <source src={videoUrl} type="video/mp4" />
             </video>
 
             {/* Background Overlay - Halka sa dark effect */}
@@ -21,7 +28,7 @@ export default function Banner() {
                 {/* Inner White Box - Transparency ko bohot kam (yani solid) kar diya hai */}
                 <div className="bg-white/65 backdrop-blur-none px-12 py-5 shadow-xl">
                     <h1 className="text-[#800032] text-2xl md:text-3xl font-bold tracking-tight text-center py-3">
-                        Together We Prosper
+                        {data?.centerText}
                     </h1>
                 </div>
 
