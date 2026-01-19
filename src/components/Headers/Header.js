@@ -24,7 +24,7 @@ export default function Header({ data }) {
                     <div className="flex gap-8 items-center">
                         {/* Media Room Link Added */}
                         {data?.LinkRightSide?.map((item, index) => (
-                            <Link key={index} href={item?.link}>
+                            <Link key={index} href={`/${item?.link}` || '#'}>
                                 <div className="flex items-center gap-2 cursor-pointer hover:opacity-80 transition-opacity">
                                     <Image
                                         src="/media_icon.png"
