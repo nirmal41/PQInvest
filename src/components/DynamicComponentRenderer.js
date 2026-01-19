@@ -4,14 +4,20 @@ import Content from './DynamicComponent/Content';
 import TableOfContent from './DynamicComponent/TableOfContent';
 import React from 'react';
 import Accordion from './DynamicComponent/Accordion';
+import Tabs from './DynamicComponent/Tabs';
+import ContentWithImage from './DynamicComponent/ContentWithImage';
+import ContentHorizontalImage from './DynamicComponent/ContentHorizontalImage';
 
 const componentMap = {
     'layout.video': Video,
     'layout.content': Content,
     'layout.accordion': Accordion,
+    'layout.tabs': Tabs,
+    'layout.content-with-image': ContentWithImage,
+    'layout.content-horizontal-image': ContentHorizontalImage,
 };
 
-export default function DynamicComponentRenderer({ component, index, tableOfContent, pageSlug }) {
+export default function DynamicComponentRenderer({ component, index, tableOfContent, pageSlug, isLast }) {
     if (!component || !component.__component) {
         console.warn('Component missing __component field:', component);
         return null;
@@ -43,15 +49,11 @@ export default function DynamicComponentRenderer({ component, index, tableOfCont
         );
     }
 
-    // For other pages, render with wrapper
+    // For other pages, render with wrapper and conditional margin
     return (
-        <div className="max-w-7xl mx-auto px-4 py-10">
-            <div className="bg-white shadow-2xl border border-gray-100 flex flex-col md:flex-row p-8 md:p-14 gap-12">
-                <div className='flex flex-grow md:w-1/3 gap-10'>
-                    <Component key={index} data={component} />
-                    {tableOfContent?.isHidden == false && <TableOfContent data={tableOfContent} />}
-                </div>
-            </div>
+        <div className={`flex flex-grow gap-10 ${isLast ? '' : 'mb-10'}`}>
+            <Component key={index} data={component} />
+            {tableOfContent?.isHidden == false && <TableOfContent data={tableOfContent} />}
         </div>
     );
 }

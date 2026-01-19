@@ -10,7 +10,7 @@ export default function TableOfContent({ data }) {
     const menuItems = data?.TableOfContent || [];
 
     return (
-        <div className="md:w-2/3">
+        <div className="md:w-1/3">
             <div className="border border-gray-200">
                 <div className="bg-[#8b0037] text-white p-4 font-bold text-lg uppercase">
                     About Us

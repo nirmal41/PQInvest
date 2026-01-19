@@ -7,7 +7,7 @@ export default function Content({ data }) {
     return (
         <div className="flex-grow">
             <div
-                className="rich-text-content text-[15px] text-[#8b0037] space-y-6 leading-relaxed"
+                className="rich-text-content text-[15px] space-y-6 leading-relaxed"
                 dangerouslySetInnerHTML={{ __html: data?.contentDetails || '' }}
             />
         </div>

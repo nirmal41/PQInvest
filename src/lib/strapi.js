@@ -46,8 +46,8 @@ export async function getPageBySlug(slugPoints) {
 
     console.log("Looking for slug:", slugPath);
 
-    // Build query URL - added TableOfContent population
-    const queryUrl = `/api/web-pages?filters[slug][$eq]=${slugPath}&populate[header][populate][web_menu][populate][Menu][populate]=*&populate[header][populate][LinkLeftSide]=*&populate[header][populate][LinkRightSide]=*&populate[Content1][populate]=*&populate[TableOfContent][populate]=*&populate[Banner][populate]=*`;
+    // Build query URL - template field is included automatically (it's an enumeration, not a relation)
+    const queryUrl = `/api/web-pages?filters[slug][$eq]=${slugPath}&populate[header][populate][web_menu][populate][Menu][populate]=*&populate[header][populate][LinkLeftSide]=*&populate[header][populate][LinkRightSide]=*&populate[Content1][populate]=*&populate[Content1][on][layout.content-with-image][populate][contentWithImage2][populate]=*&populate[Content1][on][layout.content-horizontal-image][populate][ContentHorizonalImage][populate]=*&populate[TableOfContent][populate]=*&populate[Banner][populate]=*&populate[BreadCrumbs][populate]=*`;
     const data = await fetchStrapi(queryUrl);
     console.log("Received data:", data);
     return data && data.length > 0 ? data[0] : null;

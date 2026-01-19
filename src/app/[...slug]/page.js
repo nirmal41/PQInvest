@@ -3,9 +3,8 @@ import { notFound } from "next/navigation";
 import { getPageBySlug } from "../../lib/strapi";
 import Footer from "@/components/Footers/Footer";
 import DynamicHeaderRenderer from "@/components/DynamicHeaderRenderer";
-import DynamicComponentRenderer from "@/components/DynamicComponentRenderer";
+import TemplateRenderer from "@/components/TemplateRenderer";
 import React from "react";
-import Banner from "@/components/DynamicComponent/Banner";
 
 export default async function Page({ params }) {
     const { slug } = await params;
@@ -27,24 +26,7 @@ export default async function Page({ params }) {
         <React.Fragment>
             <DynamicHeaderRenderer data={pageData.header} />
             <main className="overflow-x-hidden">
-                {pageData.slug != 'home' &&
-                    <Banner data={pageData.Banner} />
-                }
-
-                {/* Horizontal layout: Content + Sidebar */}
-                <div className="w-full">
-                    <div className="">
-                        {pageData.Content1?.map((component, index) => (
-                            <DynamicComponentRenderer
-                                key={`${component.__component}-${index}`}
-                                component={component}
-                                index={index}
-                                tableOfContent={pageData.TableOfContent}
-                                pageSlug={pageData.slug}
-                            />
-                        ))}
-                    </div>
-                </div>
+                <TemplateRenderer pageData={pageData} />
             </main>
             <Footer />
         </React.Fragment>

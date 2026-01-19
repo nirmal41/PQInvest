@@ -2,8 +2,9 @@
 import { useState } from "react";
 
 export default function Accordion({ data }) {
-    const accordionItems = data?.Accordion || [];
+    const accordionItems = data?.accordion || [];
     const [openDirector, setOpenDirector] = useState(0);
+
     return (
         <div className="flex-grow md:w-2/3">
             <div className="space-y-4">
@@ -21,9 +22,10 @@ export default function Accordion({ data }) {
                         </button>
 
                         {openDirector === index && (
-                            <div className="p-6 bg-[#fdfdfd] text-[#8b0037] text-[15px] leading-relaxed text-justify space-y-4 border-t border-gray-200">
-                                {director.Content}
-                            </div>
+                            <div
+                                className="p-5 rich-text-content text-[15px] text-[#8b0037] space-y-6 leading-relaxed"
+                                dangerouslySetInnerHTML={{ __html: director.Content || '' }}
+                            />
                         )}
                     </div>
                 ))}

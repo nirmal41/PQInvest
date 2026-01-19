@@ -92,7 +92,6 @@ export default function Header({ data }) {
                         const hasDropdown = item?.Menu && item.Menu.length > 0;
 
                         if (hasDropdown) {
-                            // Split submenu items into two equal columns
                             const midPoint = Math.ceil(item.Menu.length / 2);
                             const firstColumn = item.Menu.slice(0, midPoint);
                             const secondColumn = item.Menu.slice(midPoint);
@@ -116,7 +115,7 @@ export default function Header({ data }) {
                                                 {firstColumn.map((subItem, subIndex) => (
                                                     <Link
                                                         key={subIndex}
-                                                        href={`${subItem?.Link}` || '#'}
+                                                        href={`/${item?.Link}/${subItem?.Link}` || '#'}
                                                         className="text-[#333] text-[14px] underline decoration-1 underline-offset-4 hover:text-black w-fit"
                                                     >
                                                         {subItem?.Title}
@@ -129,7 +128,7 @@ export default function Header({ data }) {
                                                 {secondColumn.map((subItem, subIndex) => (
                                                     <Link
                                                         key={subIndex}
-                                                        href={`${subItem?.Link}` || '#'}
+                                                        href={`/${item?.Link}/${subItem?.Link}` || '#'}
                                                         className="text-[#333] text-[14px] underline decoration-1 underline-offset-4 hover:text-black w-fit"
                                                     >
                                                         {subItem?.Title}
@@ -143,7 +142,7 @@ export default function Header({ data }) {
                         } else {
                             return (
                                 <li key={index} className="group relative cursor-pointer py-2 text-[#8b0037] text-[15px] font-[400]">
-                                    <Link href={item?.Link || '#'}>{item?.TItle}</Link>
+                                    <Link href={`/${item?.Link}` || '#'}>{item?.TItle}</Link>
                                     <span className="absolute bottom-[-5px] left-0 w-0 h-[4px] bg-[#8b0037] transition-all duration-300 group-hover:w-full"></span>
                                 </li>
                             );

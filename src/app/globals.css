@@ -25,16 +25,95 @@ body {
   padding: 0;
   box-sizing: border-box;
 }
+
 /* Rich Text Content Styles from Strapi CKEditor */
-.rich-text-content h1 { font-size: 2.5rem; font-weight: bold; color: black; line-height: 1.2; margin-bottom: 2rem; }
-.rich-text-content h2 { font-size: 2.25rem; font-weight: bold; color: black; line-height: 0.7; margin-bottom: 2rem; }
-.rich-text-content h3 { font-size: 1.875rem; font-weight: bold; color: black; margin-bottom: 1.5rem; }
-.rich-text-content h4 { font-size: 1.5rem; font-weight: bold; color: #8b0037; margin-bottom: 1rem; }
-.rich-text-content p { margin-bottom: 1.5rem; }
-.rich-text-content ul, .rich-text-content ol { margin-left: 1.5rem; margin-bottom: 1.5rem; }
-.rich-text-content li { margin-bottom: 0.5rem; }
-.rich-text-content a { color: #8b0037; text-decoration: underline; }
-.rich-text-content a:hover { color: #6b0028; }
-.rich-text-content strong { font-weight: bold; }
-.rich-text-content em { font-style: italic; }
-.rich-text-content blockquote { border-left: 4px solid #8b0037; padding-left: 1rem; margin: 1.5rem 0; font-style: italic; color: #8b0037; }
+.rich-text-content h1 {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: black;
+  line-height: 1.2;
+  margin-bottom: 2rem;
+}
+
+.rich-text-content h2 {
+  font-size: 2.25rem;
+  font-weight: bold;
+  color: black;
+  line-height: 0.7;
+  margin-bottom: 2rem;
+}
+
+.rich-text-content iframe {
+  width: 100%;
+}
+
+.rich-text-content h3 {
+  font-size: 1.875rem;
+  font-weight: bold;
+  color: black;
+  margin-bottom: 1.5rem;
+}
+
+.rich-text-content h4 {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #8b0037;
+  margin-bottom: 1rem;
+}
+
+.rich-text-content p {
+  margin-bottom: 1.5rem;
+}
+
+.rich-text-content ul,
+.rich-text-content ol {
+  margin-left: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.rich-text-content li {
+  margin-bottom: 0.5rem;
+}
+
+.rich-text-content a {
+  color: #8b0037;
+  text-decoration: underline;
+}
+
+.rich-text-content a:hover {
+  color: #6b0028;
+}
+
+.rich-text-content strong {
+  font-weight: bold;
+}
+
+.rich-text-content em {
+  font-style: italic;
+}
+
+.rich-text-content blockquote {
+  border-left: 4px solid #8b0037;
+  padding-left: 1rem;
+  margin: 1.5rem 0;
+  font-style: italic;
+  color: #8b0037;
+}
+
+.rich-text-content img {
+  width: 100%;
+}
+
+
+.rich-text-content table {
+  background-color: #f8f8f8;
+  color: #8b0037;
+  border: 1px solid #c7c7c7;
+  width: 100%;
+  margin-bottom: 15px;
+}
+
+.rich-text-content table td {
+  border: 1px solid #c7c7c7;
+  padding: 10px 12px;
+}
