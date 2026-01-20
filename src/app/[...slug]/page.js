@@ -6,9 +6,37 @@ import DynamicHeaderRenderer from "@/components/DynamicHeaderRenderer";
 import TemplateRenderer from "@/components/TemplateRenderer";
 import React from "react";
 
+// Generate dynamic metadata for SEO
+export async function generateMetadata({ params }) {
+    const { slug } = await params;
+    const pageData = await getPageBySlug(slug);
+
+    if (!pageData || !pageData.metaTag || !Array.isArray(pageData.metaTag)) {
+        return {
+            title: 'Pak-Qatar Family Takaful',
+            description: 'Pak-Qatar Family Takaful - Trusted Islamic Insurance',
+        };
+    }
+
+    // Parse metaTag array to extract metadata
+    const metaTagMap = {};
+    pageData.metaTag.forEach(tag => {
+        metaTagMap[tag.title] = tag.Content;
+    });
+
+    return {
+        title: metaTagMap['title'] || 'Pak-Qatar Family Takaful',
+        description: metaTagMap['description'] || 'Pak-Qatar Family Takaful - Trusted Islamic Insurance',
+        keywords: metaTagMap['keywords'] || '',
+    };
+}
+
+
 export default async function Page({ params }) {
     const { slug } = await params;
     const pageData = await getPageBySlug(slug);
+
+    console.log("Page data aaa:", pageData.metaTag);
 
     if (!pageData) {
         console.log("Page not found for slug:", slug);

@@ -76,14 +76,16 @@ export default function Header({ data }) {
             <nav className="flex justify-between items-center py-4 bg-white relative max-w-7xl flex justify-between items-center mx-auto">
                 {/* Logo Section */}
                 <div className="flex items-center">
-                    <Image
-                        src="/logo.png"
-                        alt="Pak-Qatar Logo"
-                        width={343}
-                        height={86}
-                        className="h-14 md:h-20 w-auto object-contain"
-                        priority
-                    />
+                    <Link href="/">
+                        <Image
+                            src="/logo.png"
+                            alt="Pak-Qatar Logo"
+                            width={343}
+                            height={86}
+                            className="h-14 md:h-20 w-auto object-contain"
+                            priority
+                        />
+                    </Link>
                 </div>
 
                 {/* Navigation Links */}

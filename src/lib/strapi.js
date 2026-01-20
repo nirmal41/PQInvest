@@ -1,6 +1,5 @@
-// --- API Helpers ---
-
-const STRAPI_URL = process.env.NEXT_PUBLIC_STRAPI_API_URL || "http://localhost:2555";
+// --- API Configuration ---
+import { API_ENDPOINTS, STRAPI_URL } from './api-endpoints';
 
 /**
  * Generic fetcher for Strapi API
@@ -16,10 +15,10 @@ export async function fetchStrapi(path) {
                 'Authorization': `Bearer ${process.env.STRAPI_API_TOKEN}`
             },
             cache: "no-store"
-        }); // Disable cache for dev
+        });
+
         if (!res.ok) {
             console.error("Strapi Response Error:", res.status, res.statusText);
-            // Try to get the actual error message
             try {
                 const errorBody = await res.json();
                 console.error("Strapi Error Details:", errorBody);
@@ -28,6 +27,7 @@ export async function fetchStrapi(path) {
             }
             return null;
         }
+
         const json = await res.json();
         return json.data;
     } catch (error) {
@@ -43,12 +43,25 @@ export async function fetchStrapi(path) {
  */
 export async function getPageBySlug(slugPoints) {
     const slugPath = slugPoints.join("/");
-
     console.log("Looking for slug:", slugPath);
 
-    // Build query URL - template field is included automatically (it's an enumeration, not a relation)
-    const queryUrl = `/api/web-pages?filters[slug][$eq]=${slugPath}&populate[header][populate][web_menu][populate][Menu][populate]=*&populate[header][populate][LinkLeftSide]=*&populate[header][populate][LinkRightSide]=*&populate[Content1][populate]=*&populate[Content1][on][layout.content-with-image][populate][contentWithImage2][populate]=*&populate[Content1][on][layout.content-horizontal-image][populate][ContentHorizonalImage][populate]=*&populate[Content1][on][layout.video][populate]=*&populate[Content1][on][layout.accordion][populate]=*&populate[Content1][on][layout.tabs][populate]=*&populate[Content1][on][layout.content][populate]=*&populate[TableOfContent][populate]=*&populate[Banner][populate]=*&populate[BreadCrumbs][populate]=*`;
+    const queryUrl = `${API_ENDPOINTS.WEB_PAGES}?filters[slug][$eq]=${slugPath}&populate[header][populate][web_menu][populate][Menu][populate]=*&populate[header][populate][LinkLeftSide]=*&populate[header][populate][LinkRightSide]=*&populate[Content1][populate]=*&populate[Content1][on][layout.content-with-image][populate][contentWithImage2][populate]=*&populate[Content1][on][layout.content-horizontal-image][populate][ContentHorizonalImage][populate]=*&populate[Content1][on][layout.video][populate]=*&populate[Content1][on][layout.accordion][populate]=*&populate[Content1][on][layout.tabs][populate]=*&populate[Content1][on][layout.content][populate]=*&populate[TableOfContent][populate]=*&populate[Banner][populate]=*&populate[BreadCrumbs][populate]=*&populate[metaTag][populate]=*`;
+
     const data = await fetchStrapi(queryUrl);
     console.log("Received data:", data);
     return data && data.length > 0 ? data[0] : null;
+}
+
+/**
+ * Fetch Google Analytics tags from Strapi
+ * @returns {Promise<Object|null>} - Google Tag object with Gtag and GManager fields
+ */
+export async function fetchGoogleTag() {
+    try {
+        const data = await fetchStrapi(API_ENDPOINTS.GOOGLE_TAG);
+        return data;
+    } catch (error) {
+        console.error("Failed to fetch Google Tag:", error);
+        return null;
+    }
 }
