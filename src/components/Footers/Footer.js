@@ -1,6 +1,28 @@
 import Image from "next/image";
 
-export default function Footer() {
+export default function Footer({ data }) {
+    // 1. Data nikalna
+    const rawContent = data?.footer;
+    const { quickLinks, contactLinks, groupComapnies, FooterImages, BotFooter: cmsFooterText } = rawContent || {};
+
+    console.log("Raw Content:", rawContent);
+    // 2. Logic: Agar data Object hai (Strapi Blocks), to usay text mein badlein.
+    // Agar text hai, to wahi dikhaein. Agar khali hai, to fallback text dikhaein.
+    let finalBotFooter = "";
+
+    if (Array.isArray(cmsFooterText)) {
+        // Agar Strapi se 'Blocks' (Array) aa raha hai
+        finalBotFooter = cmsFooterText.map(block => 
+            block.children?.map(child => child.text).join('')
+        ).join(' ');
+    } else if (typeof cmsFooterText === "string") {
+        // Agar simple text aa raha hai
+        finalBotFooter = cmsFooterText;
+    } else {
+        // Backup text agar CMS se kuch na milay
+        finalBotFooter = "Last Updated: 22 November, 2026 | Copyright © 2026 Pak-Qatar Investment. Managed by: Sidat Technologies & Digital | Front Page";
+    }
+
     return (
         <footer className="bg-[#800032] text-white py-10 px-6 md:px-24 font-sans">
             <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12 text-[14px]">
@@ -11,11 +33,13 @@ export default function Footer() {
                         QUICK LINKS
                     </h3>
                     <ul className="space-y-2 font-light">
-                        <li className="cursor-pointer hover:underline decoration-1 underline-offset-4">Home</li>
-                        <li className="cursor-pointer hover:underline decoration-1 underline-offset-4">About Us</li>
-                        <li className="cursor-pointer hover:underline decoration-1 underline-offset-4">Our Services</li>
-                        <li className="cursor-pointer hover:underline decoration-1 underline-offset-4">Careers</li>
-                        <li className="cursor-pointer hover:underline decoration-1 underline-offset-4">Contact Us</li>
+                        {quickLinks?.map((item) => (
+                            <li key={item.id} className="cursor-pointer hover:underline">
+                                <a href={item.link?.startsWith('http') ? item.link : `/${item.link}`}>
+                                    {item.Title}
+                                </a>
+                            </li>
+                        ))}
                     </ul>
                 </div>
 
@@ -25,11 +49,11 @@ export default function Footer() {
                         CONTACT US
                     </h3>
                     <div className="space-y-1 font-light leading-snug">
-                        <p>Pak-Qatar Investment (Private) Limited</p>
-                        <p>First Floor, Business Arcade, Block-6,</p>
-                        <p>P.E.C.H.S, Shahrah-e-Faisal, Karachi.</p>
-                        <p className="pt-2">PABX: (+92-21) 34311747-56</p>
-                        <p>Fax: (+92 21) 34386451</p>
+                        {contactLinks?.map((item) => (
+                            <p key={item.id} className={item.Title.includes("PABX") ? "pt-2" : ""}>
+                                {item.Title} {item.link}
+                            </p>
+                        ))}
                     </div>
                 </div>
 
@@ -39,34 +63,51 @@ export default function Footer() {
                         GROUP COMPANIES
                     </h3>
                     <ul className="space-y-2 font-light">
-                        <li className="cursor-pointer hover:underline decoration-1 underline-offset-4">Pak-Qatar Family Takaful</li>
-                        <li className="cursor-pointer hover:underline decoration-1 underline-offset-4">Pak-Qatar General Takaful</li>
-                        <li className="cursor-pointer hover:underline decoration-1 underline-offset-4 leading-tight">Pak-Qatar Asset Management Company Limited</li>
+                        {groupComapnies?.map((item) => (
+                            <li key={item.id} className="cursor-pointer hover:underline leading-tight">
+                                <a href={item.link} target="_blank" rel="noopener noreferrer">
+                                    {item.Title}
+                                </a>
+                            </li>
+                        ))}
                     </ul>
                 </div>
 
-                {/* Certifications/Logos Section */}
+                {/* Certifications/Logos */}
                 <div className="flex flex-col gap-3">
-                    <div className="bg-white p-1 rounded overflow-hidden flex items-center justify-center">
-                        <img
-                            src="/jamapunji.jpg"
-                            alt="Jamapunji"
-                            className="w-full h-auto object-contain max-h-[70px]"
-                        />
-                    </div>
-                    <div className="bg-white p-1 rounded overflow-hidden flex items-center justify-center">
-                        <img
-                            src="/secp_new.jpg"
-                            alt="SECP"
-                            className="w-full h-auto object-contain max-h-[90px]"
-                        />
-                    </div>
+                    {FooterImages?.map((img) => {
+                        let href = "#";
+                        if (img.name.toLowerCase().includes("jamapunji")) href = "https://jamapunji.pk/";
+                        if (img.name.toLowerCase().includes("secp")) href = "https://www.secp.gov.pk/";
+                        if (img.name.toLowerCase().includes("logo")) href = "/";
+
+                        // Use the full URL if available, otherwise construct it
+                        const imgSrc = img.url || img.formats?.thumbnail?.url;
+                        // Determine if we need to prepend the full URL domain if it's a relative path (unlikely for S3 but good for local)
+                        const finalSrc = imgSrc?.startsWith("http") ? imgSrc : (imgSrc ? `https://pqinvest-backend.sidattech.com${imgSrc}` : "");
+
+                         // Only render if we have a valid source
+                         if (!finalSrc) return null;
+
+                        return (
+                            <a key={img.id} href={href} target={href.startsWith("http") ? "_blank" : "_self"} rel={href.startsWith("http") ? "noopener noreferrer" : ""}>
+                                <div className="bg-white p-1 rounded flex items-center justify-center">
+                                    <img 
+                                        src={finalSrc} 
+                                        alt={img.name} 
+                                        className="w-full h-auto object-contain max-h-[90px]" 
+                                    />
+                                </div>
+                            </a>
+                        );
+                    })}
                 </div>
             </div>
 
             {/* Bottom Copyright Line */}
             <div className="max-w-7xl mx-auto mt-12 pt-4 border-t border-white/20 text-center text-[12px] font-light tracking-wide opacity-90">
-                Last Updated: 22 November, 2025 | Copyright © 2025 Pak-Qatar Investment. Managed by: Sidat Technologies & Digital | Front Page
+                {/* Ab ye error nahi de ga kyunke botFooterContent hamesha Text ho ga */}
+                <div dangerouslySetInnerHTML={{ __html: finalBotFooter }} />
             </div>
         </footer>
     );

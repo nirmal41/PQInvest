@@ -50,7 +50,7 @@ export default async function HomePage() {
       <main className="overflow-x-hidden">
         <TemplateRenderer pageData={pageData} />
       </main>
-      <Footer />
+      <Footer data={pageData} />
     </React.Fragment>
   );
 }

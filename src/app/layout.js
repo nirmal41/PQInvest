@@ -2,6 +2,7 @@
 import { Open_Sans } from "next/font/google";
 import "./globals.css";
 import { fetchGoogleTag } from "@/lib/strapi";
+import Footer from "@/components/Footers/Footer";
 
 
 
@@ -32,6 +33,7 @@ export default async function RootLayout({ children }) {
           <div dangerouslySetInnerHTML={{ __html: googleTagData.Gtag }} />
         )}
         {children}
+  
       </body>
     </html>
   );
